@@ -12,7 +12,12 @@ fi
 
 if [ ! -e `which ssh` ]; then
 	echo "Installing ssh"
-	apt update && apt install ssh
+	apt update && apt install ssh || exit 1
+fi
+
+if [ ! -e `which git` ]; then
+	echo "Installing git"
+	apt update && apt install git || exit 1
 fi
 
 githome='/home/git'
