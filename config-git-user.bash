@@ -1,11 +1,18 @@
 #!/bin/bash
-# Note: This script does not install ssh for you
+
+if [ ! -e /etc/debian_version ]; then
+	echo "This script is only meant for Debian"
+	exit 1
+fi
+
 if [ "$EUID" -ne 0 ]; then
 	echo "Please run as root"
 	exit 1
-elif [ ! -e `which ssh` ]; then
-	echo "Install ssh"
-	exit 1
+fi
+
+if [ ! -e `which ssh` ]; then
+	echo "Installing ssh"
+	apt update && apt install ssh
 fi
 
 githome='/home/git'
